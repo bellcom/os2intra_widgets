@@ -1,0 +1,12 @@
+name = OS2intra Widgets
+description = Widgets to use in homebox etc.
+core = 7.x
+package = OS2Intra
+version = 7.x-1.0-beta1
+project = os2intra_widgets
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[views_view][] = os2intra_widgets
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/os2web
