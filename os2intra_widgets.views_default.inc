@@ -22,15 +22,15 @@ function os2intra_widgets_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'OS2intra Random User';
+  $handler->display->display_options['title'] = 'Tilfældige brugere';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access user profiles';
   $handler->display->display_options['cache']['type'] = 'time';
-  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan'] = '21600';
   $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
-  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan'] = '21600';
   $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -84,7 +84,7 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['block_caching'] = '-1';
   $translatables['os2intra_random_user'] = array(
     t('Master'),
-    t('OS2intra Random User'),
+    t('Tilfældige brugere'),
     t('mere'),
     t('Udfør'),
     t('Gendan'),
@@ -107,6 +107,7 @@ function os2intra_widgets_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Begivenheder';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'role';
@@ -206,7 +207,7 @@ function os2intra_widgets_views_default_views() {
   /* Display: You're attending - pane */
   $handler = $view->new_display('panel_pane', 'You\'re attending - pane', 'panel_pane_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'You\'re attending';
+  $handler->display->display_options['title'] = 'Begivenheder du deltager i';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
@@ -274,7 +275,7 @@ function os2intra_widgets_views_default_views() {
   /* Display: You created - pane */
   $handler = $view->new_display('panel_pane', 'You created - pane', 'panel_pane_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'You created';
+  $handler->display->display_options['title'] = 'Begivenheder du har oprettet';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
@@ -342,7 +343,7 @@ function os2intra_widgets_views_default_views() {
   /* Display: You follow - pane */
   $handler = $view->new_display('panel_pane', 'You follow - pane', 'panel_pane_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'You follow';
+  $handler->display->display_options['title'] = 'Begivenheder du følger';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
@@ -403,6 +404,7 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $translatables['os2intra_user_upcoming_events'] = array(
     t('Master'),
+    t('Begivenheder'),
     t('mere'),
     t('Udfør'),
     t('Gendan'),
@@ -416,15 +418,15 @@ function os2intra_widgets_views_default_views() {
     t('Alle'),
     t('Block'),
     t('You\'re attending - pane'),
-    t('You\'re attending'),
+    t('Begivenheder du deltager i'),
     t('<strong>[capacity_used]</strong> attendees,'),
     t('.'),
     t('<strong>[comment_count]</strong> comments'),
     t('View panes'),
     t('You created - pane'),
-    t('You created'),
+    t('Begivenheder du har oprettet'),
     t('You follow - pane'),
-    t('You follow'),
+    t('Begivenheder du følger'),
     t('flag'),
   );
   $export['os2intra_user_upcoming_events'] = $view;
