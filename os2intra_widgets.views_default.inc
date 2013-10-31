@@ -486,18 +486,24 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Felt: Indhold: Titel */
+  /* Felt: Gruppe titel - ekskluderet */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['relationship'] = 'og_membership_related_node_group';
+  $handler->display->display_options['fields']['title_1']['ui_name'] = 'Gruppe titel - ekskluderet';
   $handler->display->display_options['fields']['title_1']['label'] = '';
+  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_1']['element_wrapper_type'] = 'span';
   /* Felt: Indhold: Opdateret/kommenteret dato */
   $handler->display->display_options['fields']['last_updated']['id'] = 'last_updated';
   $handler->display->display_options['fields']['last_updated']['table'] = 'node_comment_statistics';
   $handler->display->display_options['fields']['last_updated']['field'] = 'last_updated';
   $handler->display->display_options['fields']['last_updated']['label'] = '';
+  $handler->display->display_options['fields']['last_updated']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['last_updated']['alter']['text'] = '[last_updated] i [title_1]';
+  $handler->display->display_options['fields']['last_updated']['element_type'] = 'span';
   $handler->display->display_options['fields']['last_updated']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['last_updated']['date_format'] = 'time ago';
   /* Sorteringskriterie: Indhold: Opdateret/kommenteret dato */
@@ -548,6 +554,7 @@ function os2intra_widgets_views_default_views() {
     t('Faldende'),
     t('OG membership from node'),
     t('Group node from OG membership'),
+    t('[last_updated] i [title_1]'),
     t('Alle'),
     t('Block'),
   );
