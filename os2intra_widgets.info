@@ -5,6 +5,7 @@ package = OS2Intra
 php = 5.2.4
 version = 7.x-1.0-beta1
 project = os2intra_widgets
+dependencies[] = os2intra_base
 dependencies[] = views
 dependencies[] = views_content
 features[ctools][] = views:views_default:3.0
