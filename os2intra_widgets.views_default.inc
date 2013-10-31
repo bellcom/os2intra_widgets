@@ -548,6 +548,8 @@ function os2intra_widgets_views_default_views() {
 
   /* Display: Block Marcetplace */
   $handler = $view->new_display('block', 'Block Marcetplace', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Markedsplads';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Kontekstuelt filter: OG membership: Group ID */
   $handler->display->display_options['arguments']['gid']['id'] = 'gid';
@@ -564,6 +566,8 @@ function os2intra_widgets_views_default_views() {
 
   /* Display: Block Internal Hearings */
   $handler = $view->new_display('block', 'Block Internal Hearings', 'block_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Intern Høring';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Kontekstuelt filter: OG membership: Group ID */
   $handler->display->display_options['arguments']['gid']['id'] = 'gid';
@@ -580,6 +584,8 @@ function os2intra_widgets_views_default_views() {
 
   /* Display: Block Summaries */
   $handler = $view->new_display('block', 'Block Summaries', 'block_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Seneste referater';
   $translatables['os2intra_widgets'] = array(
     t('Master'),
     t('OS2intra Widget Summaries'),
@@ -597,8 +603,11 @@ function os2intra_widgets_views_default_views() {
     t('Alle'),
     t('Block'),
     t('Block Marcetplace'),
+    t('Markedsplads'),
     t('Block Internal Hearings'),
+    t('Intern Høring'),
     t('Block Summaries'),
+    t('Seneste referater'),
   );
   $export['os2intra_widgets'] = $view;
 
