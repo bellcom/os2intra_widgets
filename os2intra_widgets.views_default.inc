@@ -161,6 +161,11 @@ function os2intra_widgets_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
+  /* Felt: Registration Settings: Spaces used */
+  $handler->display->display_options['fields']['capacity_used']['id'] = 'capacity_used';
+  $handler->display->display_options['fields']['capacity_used']['table'] = 'node';
+  $handler->display->display_options['fields']['capacity_used']['field'] = 'capacity_used';
+  $handler->display->display_options['fields']['capacity_used']['label'] = 'Antal tilmeldinger';
   /* Sorteringskriterie: Indhold: Oprettelsesdato */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -407,12 +412,14 @@ function os2intra_widgets_views_default_views() {
     t('node being the Registration'),
     t('Bruger'),
     t('Dato'),
+    t('Antal tilmeldinger'),
+    t('.'),
+    t(','),
     t('Alle'),
     t('Block'),
     t('You\'re attending - pane'),
     t('Begivenheder du deltager i'),
     t('<strong>[capacity_used]</strong> attendees,'),
-    t('.'),
     t('<strong>[comment_count]</strong> comments'),
     t('View panes'),
     t('You created - pane'),
