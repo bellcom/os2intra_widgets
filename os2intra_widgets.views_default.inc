@@ -445,6 +445,7 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['title'] = 'Dit indhold';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'time';
   $handler->display->display_options['cache']['results_lifespan'] = '3600';
@@ -472,6 +473,20 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['relationships']['og_membership_related_node_group']['table'] = 'og_membership';
   $handler->display->display_options['relationships']['og_membership_related_node_group']['field'] = 'og_membership_related_node_group';
   $handler->display->display_options['relationships']['og_membership_related_node_group']['relationship'] = 'og_membership_rel';
+  /* Forbindelse: Indhold: Votes */
+  $handler->display->display_options['relationships']['votingapi_vote']['id'] = 'votingapi_vote';
+  $handler->display->display_options['relationships']['votingapi_vote']['table'] = 'node';
+  $handler->display->display_options['relationships']['votingapi_vote']['field'] = 'votingapi_vote';
+  $handler->display->display_options['relationships']['votingapi_vote']['label'] = 'Stemmer';
+  $handler->display->display_options['relationships']['votingapi_vote']['votingapi'] = array(
+    'value_type' => '',
+    'tag' => 'commons_like',
+  );
+  $handler->display->display_options['relationships']['votingapi_vote']['current_user'] = 0;
+  /* Forbindelse: Tilmelding: Indholdselement to Registration */
+  $handler->display->display_options['relationships']['registration_rel']['id'] = 'registration_rel';
+  $handler->display->display_options['relationships']['registration_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['registration_rel']['field'] = 'registration_rel';
   /* Felt: Indhold: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
@@ -485,6 +500,44 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Felt: Stemmer: Værdi */
+  $handler->display->display_options['fields']['value']['id'] = 'value';
+  $handler->display->display_options['fields']['value']['table'] = 'votingapi_vote';
+  $handler->display->display_options['fields']['value']['field'] = 'value';
+  $handler->display->display_options['fields']['value']['relationship'] = 'votingapi_vote';
+  $handler->display->display_options['fields']['value']['label'] = '';
+  $handler->display->display_options['fields']['value']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['value']['element_wrapper_class'] = 'voting-count-indicator';
+  $handler->display->display_options['fields']['value']['precision'] = '0';
+  /* Felt: Indhold: Kommentarantal */
+  $handler->display->display_options['fields']['comment_count']['id'] = 'comment_count';
+  $handler->display->display_options['fields']['comment_count']['table'] = 'node_comment_statistics';
+  $handler->display->display_options['fields']['comment_count']['field'] = 'comment_count';
+  $handler->display->display_options['fields']['comment_count']['label'] = '';
+  $handler->display->display_options['fields']['comment_count']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['comment_count']['element_wrapper_class'] = 'comment-count-indicator';
+  /* Felt: SUM(Tilmelding: Slots consumed) */
+  $handler->display->display_options['fields']['count']['id'] = 'count';
+  $handler->display->display_options['fields']['count']['table'] = 'registration';
+  $handler->display->display_options['fields']['count']['field'] = 'count';
+  $handler->display->display_options['fields']['count']['relationship'] = 'registration_rel';
+  $handler->display->display_options['fields']['count']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['count']['label'] = '';
+  $handler->display->display_options['fields']['count']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['count']['element_wrapper_type'] = 'span';
+  $handler->display->display_options['fields']['count']['element_wrapper_class'] = 'attendee-count-indicator';
+  $handler->display->display_options['fields']['count']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['count']['empty_zero'] = TRUE;
+  /* Felt: Indhold: Opdateret/kommenteret dato */
+  $handler->display->display_options['fields']['last_updated']['id'] = 'last_updated';
+  $handler->display->display_options['fields']['last_updated']['table'] = 'node_comment_statistics';
+  $handler->display->display_options['fields']['last_updated']['field'] = 'last_updated';
+  $handler->display->display_options['fields']['last_updated']['label'] = '';
+  $handler->display->display_options['fields']['last_updated']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['last_updated']['alter']['text'] = '[last_updated] i [title_1]';
+  $handler->display->display_options['fields']['last_updated']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['last_updated']['element_wrapper_type'] = 'span';
+  $handler->display->display_options['fields']['last_updated']['date_format'] = 'time ago';
   /* Felt: Gruppe titel - ekskluderet */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
@@ -492,19 +545,11 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['fields']['title_1']['relationship'] = 'og_membership_related_node_group';
   $handler->display->display_options['fields']['title_1']['ui_name'] = 'Gruppe titel - ekskluderet';
   $handler->display->display_options['fields']['title_1']['label'] = '';
-  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title_1']['alter']['text'] = '[last_updated] i [title_1]';
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title_1']['element_wrapper_type'] = 'span';
-  /* Felt: Indhold: Opdateret/kommenteret dato */
-  $handler->display->display_options['fields']['last_updated']['id'] = 'last_updated';
-  $handler->display->display_options['fields']['last_updated']['table'] = 'node_comment_statistics';
-  $handler->display->display_options['fields']['last_updated']['field'] = 'last_updated';
-  $handler->display->display_options['fields']['last_updated']['label'] = '';
-  $handler->display->display_options['fields']['last_updated']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['last_updated']['alter']['text'] = '[last_updated] i [title_1]';
-  $handler->display->display_options['fields']['last_updated']['element_type'] = 'span';
-  $handler->display->display_options['fields']['last_updated']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['last_updated']['date_format'] = 'time ago';
+  $handler->display->display_options['fields']['title_1']['element_wrapper_class'] = 'group-title';
+  $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
   /* Sorteringskriterie: Indhold: Opdateret/kommenteret dato */
   $handler->display->display_options['sorts']['last_updated']['id'] = 'last_updated';
   $handler->display->display_options['sorts']['last_updated']['table'] = 'node_comment_statistics';
@@ -553,6 +598,10 @@ function os2intra_widgets_views_default_views() {
     t('Faldende'),
     t('OG membership from node'),
     t('Group node from OG membership'),
+    t('Stemmer'),
+    t('node being the Registration'),
+    t('.'),
+    t(','),
     t('[last_updated] i [title_1]'),
     t('Alle'),
     t('Block'),
