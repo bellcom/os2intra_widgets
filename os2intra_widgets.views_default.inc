@@ -262,7 +262,7 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'You are not attending any upcoming events.';
+  $handler->display->display_options['empty']['area']['content'] = 'Du er ikke tilmeldt nogle fremtidige  events.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Forbindelse: Tilmelding: Indholdselement to Registration */
   $handler->display->display_options['relationships']['registration_rel']['id'] = 'registration_rel';
@@ -542,7 +542,7 @@ function os2intra_widgets_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
-    t('You are not attending any upcoming events.'),
+    t('Du er ikke tilmeldt nogle fremtidige  events.'),
     t('node being the Registration'),
     t('Bruger'),
     t('Dato'),
