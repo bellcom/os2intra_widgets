@@ -23,6 +23,7 @@ function os2intra_widgets_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Dokumenter';
+  $handler->display->display_options['css_class'] = 'os2intra-files';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -32,6 +33,7 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['cache']['output_lifespan'] = '300';
   $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
@@ -48,6 +50,13 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'title',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Forbindelse: Fil: Indhold som bruger Filer */
   $handler->display->display_options['relationships']['reverse_field_os2web_base_field_media_node']['id'] = 'reverse_field_os2web_base_field_media_node';
@@ -121,6 +130,73 @@ function os2intra_widgets_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Felt: Fil: Mime-type */
+  $handler->display->display_options['fields']['filemime']['id'] = 'filemime';
+  $handler->display->display_options['fields']['filemime']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['filemime']['field'] = 'filemime';
+  $handler->display->display_options['fields']['filemime']['label'] = '';
+  $handler->display->display_options['fields']['filemime']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['filemime']['element_wrapper_type'] = 'span';
+  $handler->display->display_options['fields']['filemime']['filemime_image'] = TRUE;
+  /* Felt: Fil: Sti */
+  $handler->display->display_options['fields']['uri']['id'] = 'uri';
+  $handler->display->display_options['fields']['uri']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['uri']['field'] = 'uri';
+  $handler->display->display_options['fields']['uri']['label'] = '';
+  $handler->display->display_options['fields']['uri']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['uri']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uri']['link_to_file'] = TRUE;
+  $handler->display->display_options['fields']['uri']['file_download_path'] = TRUE;
+  /* Felt: Fil: Navn */
+  $handler->display->display_options['fields']['filename']['id'] = 'filename';
+  $handler->display->display_options['fields']['filename']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['filename']['field'] = 'filename';
+  $handler->display->display_options['fields']['filename']['label'] = '';
+  $handler->display->display_options['fields']['filename']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['filename']['alter']['path'] = '[uri]';
+  $handler->display->display_options['fields']['filename']['alter']['external'] = TRUE;
+  $handler->display->display_options['fields']['filename']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['filename']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['filename']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['filename']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['filename']['element_wrapper_type'] = 'span';
+  $handler->display->display_options['fields']['filename']['link_to_file'] = FALSE;
+  /* Felt: Indhold: Titel */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'reverse_field_os2web_base_field_media_node';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+
+  /* Display: Bilag */
+  $handler = $view->new_display('attachment', 'Bilag', 'attachment_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Forbindelse: Fil: Indhold som bruger Filer */
+  $handler->display->display_options['relationships']['reverse_field_os2web_base_field_media_node']['id'] = 'reverse_field_os2web_base_field_media_node';
+  $handler->display->display_options['relationships']['reverse_field_os2web_base_field_media_node']['table'] = 'file_managed';
+  $handler->display->display_options['relationships']['reverse_field_os2web_base_field_media_node']['field'] = 'reverse_field_os2web_base_field_media_node';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Kontekstuelt filter: Indhold: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'reverse_field_os2web_base_field_media_node';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['displays'] = array(
+    'block' => 'block',
+    'default' => 0,
+    'block_1' => 0,
+  );
+  $handler->display->display_options['inherit_arguments'] = FALSE;
   $translatables['os2intra_group_documents'] = array(
     t('Master'),
     t('Dokumenter'),
@@ -141,6 +217,7 @@ function os2intra_widgets_views_default_views() {
     t('OG membership from node'),
     t('Alle'),
     t('Block'),
+    t('Bilag'),
   );
   $export['os2intra_group_documents'] = $view;
 
@@ -683,7 +760,6 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['fields']['title_1']['alter']['text'] = '[last_updated] i [title_1]';
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_1']['element_wrapper_class'] = 'group-title';
-  $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
   /* Sorteringskriterie: Indhold: Opdateret/kommenteret dato */
   $handler->display->display_options['sorts']['last_updated']['id'] = 'last_updated';
   $handler->display->display_options['sorts']['last_updated']['table'] = 'node_comment_statistics';
