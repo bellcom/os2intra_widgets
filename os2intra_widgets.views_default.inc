@@ -52,13 +52,6 @@ function os2intra_widgets_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['row_class'] = '[type]';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Opførsel ved ingen resultater: Global: Tekstområde */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Intet indhold i denne gruppe';
-  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Forbindelse: Fil: Indhold som bruger Filer */
   $handler->display->display_options['relationships']['reverse_field_os2web_base_field_media_node']['id'] = 'reverse_field_os2web_base_field_media_node';
   $handler->display->display_options['relationships']['reverse_field_os2web_base_field_media_node']['table'] = 'file_managed';
@@ -377,7 +370,6 @@ function os2intra_widgets_views_default_views() {
     t('‹ forrige'),
     t('næste ›'),
     t('sidste »'),
-    t('Intet indhold i denne gruppe'),
     t('field_os2web_base_field_media'),
     t('OG membership from node'),
     t('Alle'),
@@ -1106,6 +1098,15 @@ function os2intra_widgets_views_default_views() {
   $handler = $view->new_display('block', 'Block Marcetplace', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Markedsplads';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Sidefod: Global: Tekstområde */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['empty'] = TRUE;
+  $handler->display->display_options['footer']['area']['content'] = 'Gå til <a href="/node/!1">Markedsplads</a>';
+  $handler->display->display_options['footer']['area']['format'] = 'plain_text';
+  $handler->display->display_options['footer']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Kontekstuelt filter: OG membership: Group ID */
   $handler->display->display_options['arguments']['gid']['id'] = 'gid';
@@ -1124,6 +1125,15 @@ function os2intra_widgets_views_default_views() {
   $handler = $view->new_display('block', 'Block Internal Hearings', 'block_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Intern høring';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Sidefod: Global: Tekstområde */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['empty'] = TRUE;
+  $handler->display->display_options['footer']['area']['content'] = 'Gå til <a href="/node/!1">Intern høring</a>';
+  $handler->display->display_options['footer']['area']['format'] = 'plain_text';
+  $handler->display->display_options['footer']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Kontekstuelt filter: OG membership: Group ID */
   $handler->display->display_options['arguments']['gid']['id'] = 'gid';
@@ -1160,8 +1170,10 @@ function os2intra_widgets_views_default_views() {
     t('Block'),
     t('Block Marcetplace'),
     t('Markedsplads'),
+    t('Gå til <a href="/node/!1">Markedsplads</a>'),
     t('Block Internal Hearings'),
     t('Intern høring'),
+    t('Gå til <a href="/node/!1">Intern høring</a>'),
     t('Block Summaries'),
     t('Seneste referater'),
   );
